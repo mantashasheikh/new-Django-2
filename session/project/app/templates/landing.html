@@ -1,0 +1,31 @@
+<button><a href="{% url 'set_session' %} ">set</a></button>
+<button><a href="{% url 'get_session' %} ">get</a></button>
+<button><a href="{% url 'del_session' %} ">delete</a></button>
+{% if set %}
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="">Name : </label>
+    <input type="text" name="name" >
+    <label for="">email:</label>
+    <input type="email" name="email" >
+    <label for="">age:</label>
+    <input type="text" name="age">
+    <input type="submit" value="submit">
+</form>
+
+
+
+
+
+{% elif data %}
+<p style="color:green;">{{ msg }}</p>
+<h3>User Data:</h3>
+<p>Name: {{ data.name }}</p>
+<p>Email: {{ data.email }}</p>
+<p>Age: {{ data.age }}</p>
+
+{% elif msg1 %}
+<p style="color:red;">{{ msg1 }}</p>
+
+
+{% endif %}
