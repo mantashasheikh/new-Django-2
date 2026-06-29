@@ -1,0 +1,33 @@
+<div>
+    <a href="{% url 'set_cookies' %}"><button type="submit">set_cookies</button></a>
+    <br><br>
+    <a href="{% url 'get_cookies' %}"><button type="submit">get_cookies</button></a>
+    <br><br>
+    <a href="{% url 'del_cookies'%}"><button type="submit">del_cookies</button></a>
+</div>
+
+{% if set %}
+
+<form action="" method="POST">
+    {%  csrf_token %}
+    <label for="">Name : </label>
+    <input type="text" name="name"><br><br>
+    <label for="">Email : </label>
+    <input type="email" name="email"><br><br>
+    <label for="">Age</label>
+    <input type="text" name="age"><br><br>
+    <input type="submit" name="" id="">
+</form>
+
+{% elif set_done %}
+<h3>Our Cookies are set........</h3>
+
+{% elif data %}
+My Name is : {{data.name}} <br />
+My Age is : {{data.age}} <br />
+My Email is : {{data.email}} <br />
+
+{% elif msg %}
+{{msg}}
+
+{% endif %}
