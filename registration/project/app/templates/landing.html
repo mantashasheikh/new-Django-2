@@ -1,6 +1,7 @@
-<button><a href="{% url register %}">register form open</a></button>
+<button><a href="{% url 'register' %}">register form open</a></button>
+<button><a href="{% url 'login' %}">login</a></button>
 
-
+{% if register %}
     <form method="POST" >
     {% csrf_token %}
 
@@ -37,3 +38,17 @@
         <button type="submit" id="register-btn">Register</button>
 
     </form>
+
+   {% elif login %}
+    {{msg}}
+      <form action="" method="POST">
+         {% csrf_token %}
+        <label for="">email</label>
+        <input type="text" name="email">
+        <label for="">phone number</label>
+        <input type="text" name="phone">
+        <input type="submit" name="" id="">
+
+      </form>
+       
+    {% endif %}
