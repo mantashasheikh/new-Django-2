@@ -35,8 +35,7 @@ class Empolyee(models.Model):
     gender = models.CharField(max_length=10,choices=GENDER_CHOICES)
     qualification = models.CharField(max_length=20,choices=QUALIFICATION_CHOICES)
     description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
         return self.name

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Register Page {% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="content">
+
+  <div class="container">
+        
+    <h2>Employee Registration</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>City</label>
+            <select name="city">
+                <option value="">Select City</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Indore">Indore</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Profile Image</label>
+            <input type="file" name="image" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <label>Resume</label>
+            <input type="file" name="resume" accept=".pdf,.doc,.docx">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter Password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+
+            <input type="radio" name="gender" value="Male"> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other
+        </div>
+
+        <div class="form-group">
+            <label>Qualification</label>
+
+            <select name="qualification">
+                <option value="">Select Qualification</option>
+                <option value="10th">10th</option>
+                <option value="12th">12th</option>
+                <option value="Diploma">Diploma</option>
+                <option value="BCA">BCA</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="MCA">MCA</option>
+                <option value="M.Tech">M.Tech</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" placeholder="Write something about yourself..."></textarea>
+        </div>
+
+        <button class="btn" type="submit">
+            Register
+        </button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock content %}

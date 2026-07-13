@@ -2,9 +2,9 @@
 
 <head>
     <title>  {% block title %} {% endblock title %} </title>
-    {% block style %}
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% endblock %}
+    
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
 </head>
 
 <body>
@@ -16,18 +16,22 @@
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'contact' %}">Services</a></li>
-            <li><a href="{% url 'service' %}">Contact</a></li>
+            <li><a href="{% url 'service' %}">Services</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
 
         <div class="buttons">
-            <button class="btn-register"><a href="{% url 'regiter' %}">Register</a></button>
+            <button class="btn-register"><a href="{% url 'register' %}">Register</a></button>
             <button class="btn-login"><a href="{% url 'login' %}">Login</a></button>
         </div>
 
     </nav>
 
-    {% block content %} {% endblock %}
+  
+    {% block content %} {% endblock content %}
+    
+
+    
 
     {% comment %} footer {% endcomment %}
     <footer>

@@ -5,6 +5,18 @@ from .models import Empolyee
 def landing(req):
     return render(req,'home.html')
 
+def base(request):
+    return render(request, 'base.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def service(request):
+    return render(request, 'service.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 def register(req):
     if req.method == "POST":
         n = req.POST.get('name')
@@ -21,16 +33,16 @@ def register(req):
         user = Empolyee.objects.filter(email=e)
         if user:
             msg = "User already exist"
-            return render(req,'landing.html',{'msg':msg,'register':True})
+            return render(req,'register.html',{'msg':msg,'register':True})
         else:
             if p == cp:
                 Empolyee.objects.create(name=n,email=e,city=c,image=i,resume=r,password=p,gender=g,qualification=q,description=d)
                 msg = "Registration Done........"
-                return render(req,'landing.html',{'msg':msg,'login':True})
+                return render(req,'register.html',{'msg':msg,'login':True})
             else:
                 msg = "Password and Conform+password not matched....."
-                return render(req,'landing.html',{'msg':msg,'register':True})
-    return render(req,'landing.html',{'register':True})
+                return render(req,'register.html',{'msg':msg,'register':True})
+    return render(req,'register.html',{'register':True})
 
 
 def login(req):
@@ -41,21 +53,21 @@ def login(req):
         user =  Empolyee.objects.filter(email=e)
         if not user:
             msg = "Email id is not register... Please register first..!!!!!!"
-            return render(req,'landing.html',{'login':True,'msg':msg})
+            return render(req,'login.html',{'login':True,'msg':msg})
         else:
             user_data =  Empolyee.objects.get(email=e)
             db_user_pass = user_data.password 
             if db_user_pass == p :
                 req.session['user_id'] = user_data.id
                 return redirect('dashboard')
-    return render(req,'landing.html',{'login':True})
+    return render(req,'login.html',{'login':True})
 
 def dashboard(req):
     if 'user_id' in req.session :
         user_data = Empolyee.objects.get(id=req.session.get('user_id'))
         return render(req,'dashboard.html',{'data':user_data})
     msg = "Please login first"
-    return render(req,'landing.html',{'login':True,'msg':msg})
+    return render(req,'login.html',{'login':True,'msg':msg})
 
 
 def logout(req):
