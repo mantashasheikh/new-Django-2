@@ -3,7 +3,7 @@ from .models import Empolyee
 
 # Create your views here.
 def landing(req):
-    return render(req,'landing.html')
+    return render(req,'home.html')
 
 def register(req):
     if req.method == "POST":

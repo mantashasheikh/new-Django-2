@@ -1,0 +1,79 @@
+{% load static %}
+
+<head>
+    <title>  {% block title %} {% endblock title %} </title>
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% endblock %}
+</head>
+
+<body>
+    {% comment %} nav bar {% endcomment %}
+    <nav>
+
+        <a href="#" class="logo">Web<span>Site</span></a>
+
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Services</a></li>
+            <li><a href="{% url 'service' %}">Contact</a></li>
+        </ul>
+
+        <div class="buttons">
+            <button class="btn-register"><a href="{% url 'regiter' %}">Register</a></button>
+            <button class="btn-login"><a href="{% url 'login' %}">Login</a></button>
+        </div>
+
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    {% comment %} footer {% endcomment %}
+    <footer>
+        <div class="footer-container">
+
+            <div class="footer-section">
+                <h2 class="logo">Web<span>Site</span></h2>
+                <p>
+                    We provide modern web development solutions with responsive
+                    designs and user-friendly interfaces.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+           <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">UI/UX Design</a></li>
+                    <li><a href="#">SEO</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@website.com</p>
+                <p>Phone: +91 9876543210</p>
+                <p>Address: Bhopal, Madhya Pradesh</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Website. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+
