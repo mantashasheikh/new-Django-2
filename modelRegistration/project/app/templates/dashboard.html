@@ -1,0 +1,19 @@
+{% comment %} <h3>Hello {{data.name}}.... Welcome to dashboard {{data.email}}    <a href="{% url 'logout' %}">Logout</a>
+
+Name: {{request.session.name}}  Email:{{request.session.email}}<br />
+Description: {{request.session.description}} <br />
+User_id: {{request.session.user_id}} {% endcomment %}
+
+{{data}}<br />
+{{data.name}} <br />
+
+{{data.email}} <br />
+{{data.city}} <br />
+<img src="{{data.image.url}}" alt="">
+{{data.image.url}} <br />
+{{data.resume.url}} <br />
+{{data.gender}} <br />
+{{data.qualification}} <br />
+{{data.description}} <br />
+{{data.created_at}} <br />
+{{data.updated_at}} <br />

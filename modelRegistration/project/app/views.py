@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Register
 
 # Create your views here.
@@ -35,4 +35,33 @@ def register(req):
     return render(req,'landing.html',{'register':True})
 
 def login(req):
+    if req.method == 'POST':
+        e = req.POST.get('email')
+        p = req.POST.get('password')
+
+        user = Register.objects.filter(email=e)
+        if not user:
+            msg = "Email id is not register... Please register first..!!!!!!"
+            return render(req,'landing.html',{'login':True,'msg':msg})
+        else:
+            user_data = Register.objects.get(email=e)
+            db_user_pass = user_data.password 
+            if db_user_pass == p :
+                req.session['user_id'] = user_data.id
+                return redirect('dashboard')
     return render(req,'landing.html',{'login':True})
+
+
+def dashboard(req):
+    if 'user_id' in req.session :
+        user_data = Register.objects.get(id=req.session.get('user_id'))
+        return render(req,'dashboard.html',{'data':user_data})
+    msg = "Please login first"
+    return render(req,'landing.html',{'login':True,'msg':msg})
+
+
+def logout(req):
+    if 'email' in req.session and 'password' in req.session :
+        req.session.flush()
+        return redirect('login')
+    return redirect('login')
