@@ -38,7 +38,7 @@ def register(req):
             if p == cp:
                 Empolyee.objects.create(name=n,email=e,city=c,image=i,resume=r,password=p,gender=g,qualification=q,description=d)
                 msg = "Registration Done........"
-                return render(req,'register.html',{'msg':msg,'login':True})
+                return render(req,'login.html',{'msg':msg,'login':True})
             else:
                 msg = "Password and Conform+password not matched....."
                 return render(req,'register.html',{'msg':msg,'register':True})
@@ -59,7 +59,7 @@ def login(req):
             db_user_pass = user_data.password 
             if db_user_pass == p :
                 req.session['user_id'] = user_data.id
-                return redirect('dashboard')
+                return redirect("dashboard")
     return render(req,'login.html',{'login':True})
 
 def dashboard(req):
