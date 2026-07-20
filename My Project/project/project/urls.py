@@ -29,6 +29,8 @@ urlpatterns = [
     path('register/',views.register, name='register'),
     path('login/',views.login, name='login'),
     path('dashboard/',views.dashboard,name='dashboard'),
-    path('logout/',views.logout,name='logout')
+    path('dashboard/fill_exam_form/' ,views.fill_exam_form , name='fill_exam_form' ),
+    path('logout/',views.logout,name='logout'),
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

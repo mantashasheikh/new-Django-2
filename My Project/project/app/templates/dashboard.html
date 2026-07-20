@@ -7,9 +7,143 @@
 {% endblock %}
 
 {% block content %}
+   <h1>Dashboard</h1>
   <div class="content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap:200px">
-    <h1>Dashboard</h1>
-    <div>
+    
+    
+    <div class="container1" >
+      <div>
+        <button><a href="{% url 'fill_exam_form' %}">Fill EXAM FORM</a></button>
+      </div>
+      <div>
+        {% comment %} <button><a href="{% url 'show_table' %}">show table</a></button> {% endcomment %}
+      </div>
+    </div>
+
+       {% if exam_form %}
+       
+         <form action="" method="POST">
+           {% csrf_token %}
+           <div class="row">
+            <div class="input-box">
+                <label>First Name</label>
+                <input type="text" placeholder="Enter First Name" required>
+            </div>
+
+            <div class="input-box">
+                <label>Last Name</label>
+                <input type="text" placeholder="Enter Last Name" required>
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter Email" required>
+        </div>
+
+        <div class="input-box">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="Enter Mobile Number" required>
+        </div>
+
+        <div class="row">
+            <div class="input-box">
+                <label>Date of Birth</label>
+                <input type="date" required>
+            </div>
+
+            <div class="input-box">
+                <label>Gender</label>
+
+                <div class="gender">
+                    <label><input type="radio" name="gender"> Male</label>
+                    <label><input type="radio" name="gender"> Female</label>
+                    <label><input type="radio" name="gender"> Other</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label>Address</label>
+            <textarea rows="4" placeholder="Enter Address"></textarea>
+        </div>
+
+        <div class="row">
+
+            <div class="input-box">
+                <label>Select Exam</label>
+
+                <select>
+                    <option>Select Exam</option>
+                    <option>NDA</option>
+                    <option>JEE Main</option>
+                    <option>NEET</option>
+                    <option>CUET</option>
+                    <option>SSC</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label>Exam Center</label>
+
+                <select>
+                    <option>Select Center</option>
+                    <option>Bhopal</option>
+                    <option>Indore</option>
+                    <option>Jabalpur</option>
+                    <option>Gwalior</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="input-box">
+            <label>Upload Photograph</label>
+            <input type="file">
+        </div>
+
+        <div class="input-box">
+            <label>Upload Signature</label>
+            <input type="file">
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" required>
+            <span>I confirm that the information provided is correct.</span>
+        </div>
+
+        <button type="submit">Submit Form</button>
+         </form>
+       
+       {% else %}
+       {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         {% comment %} <h3>Hello {{data.name}}.... Welcome to dashboard {{data.email}}    <a href="{% url 'logout' %}">Logout</a>
 
@@ -17,7 +151,7 @@
          Description: {{request.session.description}} <br />
          User_id: {{request.session.user_id}} {% endcomment %}
 
-         {{data}}<br />
+         {% comment %} {{data}}<br />
          {{data.name}} <br />
 
          {{data.email}} <br />
@@ -29,7 +163,7 @@
          {{data.qualification}} <br />
          {{data.description}} <br />
          {{data.created_at}} <br />
-         {{data.updated_at}} <br />
+         {{data.updated_at}} <br /> {% endcomment %}
 
     </div>
   </div>

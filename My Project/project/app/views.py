@@ -70,8 +70,17 @@ def dashboard(req):
     return render(req,'login.html',{'login':True,'msg':msg})
 
 
+def fill_exam_form(req):
+    if 'user_id' in req.session :
+        user_data = Empolyee.objects.get(id=req.session.get('user_id'))
+        return render(req,'dashboard.html',{'data':user_data, 'exam_form':True})
+    return redirect('login')
+
+from django.contrib.sessions.models import Session
 def logout(req):
     if 'email' in req.session and 'password' in req.session :
-        req.session.flush()
+        # req.session.flush()
+        # req.session.clear()
+        Session.objects.all().delete()
         return redirect('login')
     return redirect('login')
