@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'subbase.html' %}
 {% load static %}
 
 {% block title %}
@@ -9,50 +9,8 @@ Dashboard
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}
 
-{% block content %}
 
-<div class="dashboard">
-
-    <aside class="sidebar">
-
-        <h2>Student Panel</h2>
-
-        <ul>
-
-            <li>
-                <a href="{% url 'dashboard' %}">
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'profile' %}">
-                    My Profile
-                </a>
-            </li> 
-
-            <li>
-                <a href="{% url 'Fill_exam_form' %}">
-                    Add Student
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'view_student' %}">
-                    View Students
-                </a>
-            </li>
-
-            <li>
-                <a href="{% url 'logout' %}">
-                    Logout
-                </a>
-            </li>
-
-        </ul>
-
-    </aside>
-
+{% block dashboard_content %}
     <div class="dashboard-content">
 
         <h1>Welcome Student</h1>
@@ -64,6 +22,6 @@ Dashboard
 
     </div>
 
-</div>
 
 {% endblock %}
+

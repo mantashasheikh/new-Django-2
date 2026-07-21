@@ -59,7 +59,11 @@ def login(req):
     return render(req,'login.html')
 
 def dashboard(req):
-    return render(req,'dashboard.html')
+    if 'user_id' in req.session :
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,'dashboard.html',{'data':user_data})
+    msg = "Please login first"
+    return render(req,'dashboard.html',{'login':True,'msg':msg})
 
 def dashboard_home(req):
     return render(req , "dashboard_home.html")
@@ -68,7 +72,11 @@ def profile(req):
     return render(req , 'profile.html')
 
 def fill_exam_form(req):
-   return render(req,'fill_exam_form.html')
+    if 'user_id' in req.session :
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True})
+    return redirect('login')
+   
 
 def show_details(req):
     return render(req , 'show_details.html')
