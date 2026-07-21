@@ -1,0 +1,53 @@
+.container{
+
+    width:750px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+
+}
+
+.row{
+
+    display:flex;
+    gap:20px;
+
+}
+
+.input-box{
+
+    width:100%;
+    margin-bottom:20px;
+
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea{
+
+    width:100%;
+    padding:12px;
+
+}
+
+.gender{
+
+    display:flex;
+    gap:20px;
+
+}
+
+.checkbox{
+
+    display:flex;
+    gap:10px;
+
+}
+
+button{
+
+    width:100%;
+    padding:12px;
+
+}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Register Page {% endblock title %}
+{% block title %} Login {% endblock title %}
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock %}
@@ -37,7 +37,7 @@
 
             <div class="register">
                 Don't have an account?
-                <a href="register.html">Register</a>
+                <a href="{% url 'register' %}">Register</a>
             </div>
 
         </form>

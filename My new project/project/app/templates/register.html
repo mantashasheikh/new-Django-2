@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Student Registration{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="register-section">
+
+    <div class="register-card">
+
+        <!-- Header -->
+        <div class="register-header">
+
+            <div class="student-icon">
+                🎓
+            </div>
+
+            <h2>Student Registration</h2>
+
+            <p>Create your student account by filling the details below.</p>
+
+            {% if msg %}
+            <div class="message">
+                {{ msg }}
+            </div>
+            {% endif %}
+
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <!-- Personal Information -->
+
+            <div class="section-title">
+                <h3>Personal Information</h3>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" placeholder="Enter Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter Email Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label>City</label>
+                    <select name="city" required>
+                        <option value="">Select City</option>
+                        <option value="Bhopal">Bhopal</option>
+                        <option value="Indore">Indore</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Qualification</label>
+                    <select name="qualification" required>
+                        <option value="">Select Qualification</option>
+                        <option value="10th">10th</option>
+                        <option value="12th">12th</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="BCA">BCA</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="MCA">MCA</option>
+                        <option value="M.Tech">M.Tech</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Upload -->
+
+            <div class="section-title">
+                <h3>Upload Documents</h3>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Profile Image</label>
+                    <input type="file" name="image" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label>Resume</label>
+                    <input type="file" name="resume" accept=".pdf,.doc,.docx">
+                </div>
+
+            </div>
+
+            <!-- Security -->
+
+            <div class="section-title">
+                <h3>Security</h3>
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" name="con_password" placeholder="Confirm Password" required>
+                </div>
+
+            </div>
+
+            <!-- Gender -->
+
+            <div class="section-title">
+                <h3>Gender</h3>
+            </div>
+
+            <div class="gender-box">
+
+                <label>
+                    <input type="radio" name="gender" value="Male" required>
+                    Male
+                </label>
+
+                <label>
+                    <input type="radio" name="gender" value="Female">
+                    Female
+                </label>
+
+                <label>
+                    <input type="radio" name="gender" value="Other">
+                    Other
+                </label>
+
+            </div>
+
+            <!-- About -->
+
+            <div class="section-title">
+                <h3>About Yourself</h3>
+            </div>
+
+            <div class="form-group">
+
+                <textarea
+                    name="description"
+                    placeholder="Write something about yourself..."
+                ></textarea>
+
+            </div>
+
+            <!-- Button -->
+
+            <button type="submit" class="register-btn">
+                Register Student
+            </button>
+
+            <div class="login-text">
+                Already have an account?
+                <a href="{% url 'login' %}">
+                    Login Here
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
