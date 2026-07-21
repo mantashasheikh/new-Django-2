@@ -5,9 +5,6 @@ from .models import Student
 def landing(req):
     return render(req,'home.html')
 
-def base(request):
-    return render(request, 'base.html')
-
 def about(request):
     return render(request, 'about.html')
 
@@ -42,11 +39,9 @@ def register(req):
             else:
                 msg = "Password and Conform+password not matched....."
                 return render(req,'register.html',{'msg':msg,'register':True})
-    
     return render(req,'register.html',{'register':True})
 
-
-def login(req): 
+def login(req):
     if req.method == 'POST':
         e = req.POST.get('email')
         p = req.POST.get('password')
@@ -61,32 +56,25 @@ def login(req):
             if db_user_pass == p :
                 req.session['user_id'] = user_data.id
                 return redirect("dashboard")
-    return render(req,'login.html',{'login':True})
+    return render(req,'login.html')
 
 def dashboard(req):
-    if 'user_id' in req.session :
-        user_data = Student.objects.get(id=req.session.get('user_id'))
-        return render(req,'dashboard.html',{'data':user_data})
-    msg = "Please login first"
-    return render(req,'login.html',{'login':True,'msg':msg})
+    return render(req,'dashboard.html')
+
+def dashboard_home(req):
+    return render(req , "dashboard_home.html")
+
+def profile(req):
+    return render(req , 'profile.html')
 
 def fill_exam_form(req):
-    if 'user_id' in req.session :
-        user_data = Student.objects.get(id=req.session.get('user_id'))
-        return render(req,'dashboard.html',{'data':user_data, 'exam_form':True})
-    return redirect('login')
+   return render(req,'fill_exam_form.html')
 
+def show_details(req):
+    return render(req , 'show_details.html')
 
-
-# from django.contrib.sessions.models import Session
 def logout(req):
-    if 'email' in req.session and 'password' in req.session :
-        req.session.flush()
-        # req.session.clear()
-        # Session.objects.all().delete()
-        return redirect('login')
     return redirect('login')
-
 
 
    
