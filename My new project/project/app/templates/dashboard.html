@@ -10,5 +10,60 @@ Dashboard
 {% endblock %}
 
 {% block content %}
-<!-- Page Content -->
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+
+        <h2>Student Panel</h2>
+
+        <ul>
+
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            {% comment %} <li>
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
+            </li> {% endcomment %}
+
+            <li>
+                <a href="{% url 'Fill_exam_form' %}">
+                    Add Student
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'view_student' %}">
+                    View Students
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <div class="dashboard-content">
+
+        <h1>Welcome Student</h1>
+
+        <p>
+            Welcome to your Student Dashboard.
+            Select any option from the left sidebar.
+        </p>
+
+    </div>
+
+</div>
+
 {% endblock %}

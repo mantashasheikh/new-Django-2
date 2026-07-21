@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% block dashboard_css %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="sidebar">
+
+        <h2>Student Panel</h2>
+
+        <ul>
+
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
+            </li> 
+
+            <li>
+                <a href="{% url 'fill_exam_form' %}">
+                    Add Student
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'show_details' %}">
+                    View Students
+                </a>
+            </li> 
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <div class="content-area">
+
+        {% block dashboard_content %}
+
+        {% endblock %}
+
+    </div>
+
+</div>
+
+{% endblock %}

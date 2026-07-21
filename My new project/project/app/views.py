@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Student
 
 # Create your views here.
@@ -46,9 +46,48 @@ def register(req):
     return render(req,'register.html',{'register':True})
 
 
-def login(req):
-   return render(req,'login.html')
+def login(req): 
+    if req.method == 'POST':
+        e = req.POST.get('email')
+        p = req.POST.get('password')
+
+        user =  Student.objects.filter(email=e)
+        if not user:
+            msg = "Email id is not register... Please register first..!!!!!!"
+            return render(req,'login.html',{'login':True,'msg':msg})
+        else:
+            user_data =  Student.objects.get(email=e)
+            db_user_pass = user_data.password 
+            if db_user_pass == p :
+                req.session['user_id'] = user_data.id
+                return redirect("dashboard")
+    return render(req,'login.html',{'login':True})
 
 def dashboard(req):
-    return render(req,'dashboard.html')
+    if 'user_id' in req.session :
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,'dashboard.html',{'data':user_data})
+    msg = "Please login first"
+    return render(req,'login.html',{'login':True,'msg':msg})
+
+def fill_exam_form(req):
+    if 'user_id' in req.session :
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,'dashboard.html',{'data':user_data, 'exam_form':True})
+    return redirect('login')
+
+
+
+# from django.contrib.sessions.models import Session
+def logout(req):
+    if 'email' in req.session and 'password' in req.session :
+        req.session.flush()
+        # req.session.clear()
+        # Session.objects.all().delete()
+        return redirect('login')
+    return redirect('login')
+
+
+
+   
     

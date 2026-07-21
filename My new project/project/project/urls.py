@@ -27,7 +27,11 @@ urlpatterns = [
     path('register/',views.register, name='register'),
     path('login/',views.login, name='login'),
     path('dashboard/',views.dashboard,name='dashboard'),
-
+    # path('profile/', views.profile, name='profile'),
+    path('fill_exam_form/', views.fill_exam_form, name='fill_exam_form'),
+    # path('show_details/', views.show_details, name='show_details'),
+    path('logout/', views.logout, name='logout'),
+    
     
     
 ] 
