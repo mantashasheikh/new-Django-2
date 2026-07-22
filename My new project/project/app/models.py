@@ -1,8 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-
 class Student(models.Model):
 
     CITY_CHOICES = (
@@ -44,20 +42,21 @@ class Student(models.Model):
     def __str__(self):
         return self.name
     
-from django.db import models
-
-class Exam_form(models.Model):
+class ExamForm(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    mobile = models.CharField(max_length=15)
+    mobile = models.CharField(max_length=10)
     dob = models.DateField()
     gender = models.CharField(max_length=10)
     address = models.TextField()
-    exam = models.CharField(max_length=100)
-    exam_center = models.CharField(max_length=100)
+    exam = models.CharField(max_length=20)
+    exam_center = models.CharField(max_length=20)
+    subject = models.CharField(max_length=30, null=True)
     photograph = models.ImageField(upload_to='photos/')
     signature = models.ImageField(upload_to='signatures/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    def _str_(self):
-        return self.first_name    
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

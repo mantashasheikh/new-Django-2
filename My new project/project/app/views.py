@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Student
+from .models import ExamForm
 
 # Create your views here.
 def landing(req):
@@ -72,9 +73,38 @@ def profile(req):
     return render(req , 'profile.html')
 
 def fill_exam_form(req):
+    
     if 'user_id' in req.session :
-        user_data = Student.objects.get(id=req.session.get('user_id'))
-        return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True})
+        if req.method == "POST":
+            fn = req.POST.get('firstName')
+            ln = req.POST.get('lastName')
+            e = req.POST.get('email')
+            m = req.POST.get('mobile')
+            dob = req.POST.get('dob')
+            g = req.POST.get('gender')
+            a = req.POST.get('address')
+            se = req.POST.get('subject')
+            c = req.POST.get('center')
+            p = req.FILES.get('photo')
+            f = req.FILES.get('file')
+            check_subject = ExamForm.objects.filter(subject=se)
+            if not check_subject :
+                 
+                ExamForm.objects.create(first_name=fn,last_name=ln,email=e,mobile=m,dob=dob,
+                                    gender=g,address=a,exam=se,exam_center=c,photograph=p,signature=f,subject=se)
+            
+                user_data = Student.objects.get(id=req.session.get('user_id'))
+                msg = "Exam form submited succesfully"
+                return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True , 'msg':msg})
+            else:
+                msg = "Exam form already submited"
+                user_data = Student.objects.get(id=req.session.get('user_id'))
+                return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True , 'msg':msg})
+        else:
+            user_data = Student.objects.get(id=req.session.get('user_id'))
+            return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True})
+            
+            
     return redirect('login')
    
 

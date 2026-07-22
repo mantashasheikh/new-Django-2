@@ -5,35 +5,37 @@
 
 <h1>Fill Exam Form</h1>
 
-<form action="" method="POST">
+{{msg}}
+
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
         <div class="input-box">
             <label>First Name</label>
-            <input type="text" placeholder="Enter First Name" required>
-        </div>
+            <input type="text" name="firstName" placeholder="Enter First Name" required>
+        </div><br>
 
         <div class="input-box">
             <label>Last Name</label>
-            <input type="text" placeholder="Enter Last Name" required>
+            <input type="text" name="lastName" placeholder="Enter Last Name" required>
         </div>
-    </div>
+    </div><br>
 
     <div class="input-box">
         <label>Email Address</label>
-        <input type="email" placeholder="Enter Email" required>
-    </div>
+        <input type="email" name="email" placeholder="Enter Email" required>
+    </div><br>
 
     <div class="input-box">
         <label>Mobile Number</label>
-        <input type="tel" placeholder="Enter Mobile Number" required>
-    </div>
+        <input type="tel" name="mobile" placeholder="Enter Mobile Number" required>
+    </div><br>
 
     <div class="row">
         <div class="input-box">
             <label>Date of Birth</label>
-            <input type="date" required>
-        </div>
+            <input type="date" name="dob" required>
+        </div><br>
 
         <div class="input-box">
             <label>Gender</label>
@@ -45,19 +47,19 @@
             </div>
 
         </div>
-    </div>
+    </div><br>
 
     <div class="input-box">
         <label>Address</label>
-        <textarea rows="4" placeholder="Enter Address"></textarea>
-    </div>
+        <textarea rows="4" name="address" placeholder="Enter Address"></textarea>
+    </div><br>
 
     <div class="row">
 
         <div class="input-box">
             <label>Select Exam</label>
 
-            <select>
+            <select name="subject">
                 <option>Select Exam</option>
                 <option>NDA</option>
                 <option>JEE Main</option>
@@ -65,12 +67,12 @@
                 <option>CUET</option>
                 <option>SSC</option>
             </select>
-        </div>
+        </div><br>
 
         <div class="input-box">
             <label>Exam Center</label>
 
-            <select>
+            <select name="center">
                 <option>Select Center</option>
                 <option>Bhopal</option>
                 <option>Indore</option>
@@ -79,22 +81,22 @@
             </select>
         </div>
 
-    </div>
+    </div><br>
 
     <div class="input-box">
         <label>Upload Photograph</label>
-        <input type="file">
-    </div>
+        <input type="file" name="photo">
+    </div><br>
 
     <div class="input-box">
         <label>Upload Signature</label>
-        <input type="file">
-    </div>
+        <input type="file" name="file">
+    </div><br>
 
     <div class="checkbox">
-        <input type="checkbox" required>
+        <input type="checkbox"  required>
         <span>I confirm that the information provided is correct.</span>
-    </div>
+    </div><br>
 
     <button type="submit">Submit Form</button>
 </form>
