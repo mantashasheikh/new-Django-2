@@ -7,23 +7,24 @@
 
 {{msg}}
 
+{% if not Exam_data %}
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
         <div class="input-box">
             <label>First Name</label>
-            <input type="text" name="firstName" placeholder="Enter First Name" required>
+            <input type="text" value="{{data.name}}" readonly name="firstName" placeholder="Enter First Name" required>
         </div><br>
 
         <div class="input-box">
             <label>Last Name</label>
-            <input type="text" name="lastName" placeholder="Enter Last Name" required>
+            <input type="text"  name="lastName" placeholder="Enter Last Name" required>
         </div>
     </div><br>
 
     <div class="input-box">
         <label>Email Address</label>
-        <input type="email" name="email" placeholder="Enter Email" required>
+        <input type="email"  value="{{data.email}}" readonly name="email" placeholder="Enter Email" required>
     </div><br>
 
     <div class="input-box">
@@ -59,7 +60,7 @@
         <div class="input-box">
             <label>Select Exam</label>
 
-            <select name="subject">
+            <select name="exam">
                 <option>Select Exam</option>
                 <option>NDA</option>
                 <option>JEE Main</option>
@@ -100,4 +101,102 @@
 
     <button type="submit">Submit Form</button>
 </form>
+
+{% else %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="input-box">
+            <label>First Name</label>
+            <input type="text" value="{{Exam_data.first_name}}" readonly name="firstName" placeholder="Enter First Name" required>
+        </div><br>
+
+        <div class="input-box">
+            <label>Last Name</label>
+            <input type="text" value="{{Exam_data.last_name}}"  name="lastName" placeholder="Enter Last Name" required>
+        </div>
+    </div><br>
+
+    <div class="input-box">
+        <label>Email Address</label>
+        <input type="email"  value="{{Exam_data.email}}" readonly name="email" placeholder="Enter Email" required>
+    </div><br>
+
+    <div class="input-box">
+        <label>Mobile Number</label>
+        <input type="tel" value="{{Exam_data.mobile}}"  name="mobile" placeholder="Enter Mobile Number" required>
+    </div><br>
+
+    <div class="row">
+        <div class="input-box">
+            <label>Date of Birth</label>
+            <input type="date" value="{{Exam_data.dob}}" name="dob" required>
+        </div><br>
+
+        <div class="input-box">
+            <label>Gender</label>
+
+            <div class="gender">
+                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Male</label>
+                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Female</label>
+                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Other</label>
+            </div>
+
+        </div>
+    </div><br>
+
+    <div class="input-box">
+        <label>Address</label>
+        <textarea rows="4" name="address" placeholder="Enter Address">{{Exam_data.address}}</textarea>
+    </div><br>
+
+    <div class="row">
+
+        <div class="input-box">
+            <label>Select Exam</label>
+
+            <select name="exam" value="{{Exam_data.exam}}">
+                <option>Select Exam</option>
+                <option>NDA</option>
+                <option>JEE Main</option>
+                <option>NEET</option>
+                <option>CUET</option>
+                <option>SSC</option>
+            </select>
+        </div><br>
+
+        <div class="input-box">
+            <label>Exam Center</label>
+
+            <select name="center" value="{{Exam_data.exam_center}}" >
+                <option>Select Center</option>
+                <option>Bhopal</option>
+                <option>Indore</option>
+                <option>Jabalpur</option>
+                <option>Gwalior</option>
+            </select>
+        </div>
+
+    </div><br>
+
+    <div class="input-box">
+        <label>Upload Photograph</label>
+        <input type="file" value="{{Exam_data.photograph}}"  name="photo">
+    </div><br>
+
+    <div class="input-box">
+        <label>Upload Signature</label>
+        <input type="file" value="{{Exam_data.signature}}" name="file">
+    </div><br>
+
+    <div class="checkbox">
+        <input type="checkbox"  required>
+        <span>I confirm that the information provided is correct.</span>
+    </div><br>
+
+    <button type="submit">Update form</button>
+</form>
+{% endif %}
+
+
 {% endblock %}

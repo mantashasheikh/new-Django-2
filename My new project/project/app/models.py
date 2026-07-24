@@ -52,7 +52,7 @@ class ExamForm(models.Model):
     address = models.TextField()
     exam = models.CharField(max_length=20)
     exam_center = models.CharField(max_length=20)
-    subject = models.CharField(max_length=30, null=True)
+    # subject = models.CharField(max_length=30, null=True)
     photograph = models.ImageField(upload_to='photos/')
     signature = models.ImageField(upload_to='signatures/')
     created_at = models.DateTimeField(auto_now_add=True)

@@ -73,7 +73,6 @@ def profile(req):
     return render(req , 'profile.html')
 
 def fill_exam_form(req):
-    
     if 'user_id' in req.session :
         if req.method == "POST":
             fn = req.POST.get('firstName')
@@ -83,15 +82,15 @@ def fill_exam_form(req):
             dob = req.POST.get('dob')
             g = req.POST.get('gender')
             a = req.POST.get('address')
-            se = req.POST.get('subject')
+            ex = req.POST.get('exam')
             c = req.POST.get('center')
             p = req.FILES.get('photo')
             f = req.FILES.get('file')
-            check_subject = ExamForm.objects.filter(subject=se)
+            check_subject = ExamForm.objects.filter(exam=ex)
             if not check_subject :
                  
                 ExamForm.objects.create(first_name=fn,last_name=ln,email=e,mobile=m,dob=dob,
-                                    gender=g,address=a,exam=se,exam_center=c,photograph=p,signature=f,subject=se)
+                                    gender=g,address=a,exam=ex,exam_center=c,photograph=p,signature=f)
             
                 user_data = Student.objects.get(id=req.session.get('user_id'))
                 msg = "Exam form submited succesfully"
@@ -103,13 +102,22 @@ def fill_exam_form(req):
         else:
             user_data = Student.objects.get(id=req.session.get('user_id'))
             return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True})
-            
-            
     return redirect('login')
    
 
 def show_details(req):
-    return render(req , 'show_details.html')
+    if 'user_id' in req.session:
+        Exam_data = ExamForm.objects.all()
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
+    return render(req , 'login')
+
+def edit(req,pk):
+    if 'user_id' in req.session:
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        exam_data = ExamForm.objects.get(id=pk)
+        return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True , 'Exam_data':exam_data})
+        
 
 def logout(req):
     return redirect('login')
