@@ -24,7 +24,7 @@
 
     {% for student in Exam_data %}
     <tr>
-        <td>{{ student.id }}</td>
+        <td>{{ forloop.counter}}</td>
         <td>{{ student.first_name }}</td>
         <td>{{ student.last_name }}</td>
         <td>{{ student.email }}</td>
@@ -41,10 +41,10 @@
         </td>
 
         <td>
-            <a href="{{ student.signature.url }}" download >download file</a>
+            <a href="{{ student.signature.url }}" download >resume</a>
         </td>
         <td><a href="{% url 'edit' pk=student.id %}"><button type="submit">edit</button></a></td>
-        <td><a href=""><button type="submit">delete</button></a></td>
+        <td><a href="{% url 'delete' pk=student.id %}"><button type="submit">delete</button></a></td>
     </tr>
     {% empty %}
     <tr>

@@ -110,13 +110,23 @@ def show_details(req):
         Exam_data = ExamForm.objects.all()
         user_data = Student.objects.get(id=req.session.get('user_id'))
         return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
-    return render(req , 'login')
+    return redirect('login')
 
 def edit(req,pk):
     if 'user_id' in req.session:
         user_data = Student.objects.get(id=req.session.get('user_id'))
         exam_data = ExamForm.objects.get(id=pk)
         return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True , 'Exam_data':exam_data})
+
+def delete(req,pk):
+    if 'user_id' in req.session:
+        ExamForm.objects.get(id=pk).delete()
+        Exam_data = ExamForm.objects.all()
+        user_data = Student.objects.get(id=req.session.get('user_id'))
+        return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
+    return redirect('login')
+
+
         
 
 def logout(req):

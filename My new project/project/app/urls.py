@@ -18,6 +18,7 @@ urlpatterns = [
     path('fill_exam_form/', views.fill_exam_form , name='fill_exam_form'),
     path('show_details/', views.show_details, name='show_details'),
     path('show_details/edit/<int:pk>/', views.edit, name="edit" ),
+     path('show_details/delete/<int:pk>/', views.delete, name="delete" ),
     path('logout/', views.logout, name='logout'),
     
     
