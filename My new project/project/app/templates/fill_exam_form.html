@@ -42,9 +42,9 @@
             <label>Gender</label>
 
             <div class="gender">
-                <label><input type="radio" name="gender"> Male</label>
-                <label><input type="radio" name="gender"> Female</label>
-                <label><input type="radio" name="gender"> Other</label>
+                <label><input type="radio" value="Male" name="gender"> Male</label>
+                <label><input type="radio" value="Female" name="gender"> Female</label>
+                <label><input type="radio" value="other" name="gender"> Other</label>
             </div>
 
         </div>
@@ -130,16 +130,18 @@
     <div class="row">
         <div class="input-box">
             <label>Date of Birth</label>
-            <input type="date" value="{{Exam_data.dob}}" name="dob" required>
+            <input type="date" name="dob" value="{{ Exam_data.dob|date:'Y-m-d' }}" required>
         </div><br>
 
         <div class="input-box">
             <label>Gender</label>
 
+            
+
             <div class="gender">
-                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Male</label>
-                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Female</label>
-                <label><input type="radio" value="{{Exam_data.gender}}" name="gender"> Other</label>
+               <label><input type="radio" name="gender" value="Male" {% if Exam_data.gender == 'Male' %}checked{% endif %}> Male</label>
+               <label><input type="radio" name="gender" value="Female" {% if Exam_data.gender ==  'Female' %}checked{% endif %}> Female</label>
+               <label><input type="radio" name="gender" value="other" {% if Exam_data.gender == 'other' %}checked{% endif %}> Other</label>
             </div>
 
         </div>
@@ -155,25 +157,25 @@
         <div class="input-box">
             <label>Select Exam</label>
 
-            <select name="exam" value="{{Exam_data.exam}}">
+            <select name="exam">
                 <option>Select Exam</option>
-                <option>NDA</option>
-                <option>JEE Main</option>
-                <option>NEET</option>
-                <option>CUET</option>
-                <option>SSC</option>
+                <option value="NDA" {% if Exam_data.exam == 'NDA' %} selected {% endif%}>NDA</option>
+                <option value="JEE Main" {% if Exam_data.exam == 'JEE Main' %} selected {% endif%}>JEE Main</option>
+                <option value="NEET" {% if Exam_data.exam == 'NEET' %} selected {% endif%}>NEET</option>
+                <option value="CUET" {% if Exam_data.exam == 'CUET' %} selected {% endif%}>CUET</option>
+                <option value="SSC" {% if Exam_data.exam == 'SSC' %} selected {% endif%}>SSC</option>
             </select>
         </div><br>
 
         <div class="input-box">
             <label>Exam Center</label>
 
-            <select name="center" value="{{Exam_data.exam_center}}" >
+            <select name="center" >
                 <option>Select Center</option>
-                <option>Bhopal</option>
-                <option>Indore</option>
-                <option>Jabalpur</option>
-                <option>Gwalior</option>
+                <option value="Bhopal" {% if Exam_data.exam_center == 'Bhopal' %} selected {% endif %}>Bhopal</option>
+                <option value="Indore" {% if Exam_data.exam_center == 'Indore' %} selected {% endif %}>Indore</option>
+                <option value="Jabalpur" {% if Exam_data.exam_center == 'Jabalpur' %} selected {% endif %}>Jabalpur</option>
+                <option value="Gwalior" {% if Exam_data.exam_center == 'Gwalior' %} selected {% endif %}>Gwalior</option>
             </select>
         </div>
 
@@ -181,12 +183,14 @@
 
     <div class="input-box">
         <label>Upload Photograph</label>
-        <input type="file" value="{{Exam_data.photograph}}"  name="photo">
+        <input type="file"  value=""  name="photo">
+        {{Exam_data.photograph}}
     </div><br>
 
     <div class="input-box">
         <label>Upload Signature</label>
-        <input type="file" value="{{Exam_data.signature}}" name="file">
+        <input type="file" value="" name="file">
+        {{Exam_data.signature}}
     </div><br>
 
     <div class="checkbox">
