@@ -103,7 +103,7 @@
 </form>
 
 {% else %}
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="{% url 'updateform' pk=Exam_data.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
         <div class="input-box">
@@ -183,13 +183,13 @@
 
     <div class="input-box">
         <label>Upload Photograph</label>
-        <input type="file"  value=""  name="photo">
+        <input type="file"  value={{Exam_data.photograph}}  name="photo">
         {{Exam_data.photograph}}
     </div><br>
 
     <div class="input-box">
         <label>Upload Signature</label>
-        <input type="file" value="" name="file">
+        <input type="file" value={{Exam_data.signature}} name="file">
         {{Exam_data.signature}}
     </div><br>
 

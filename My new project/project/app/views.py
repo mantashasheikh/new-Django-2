@@ -118,6 +118,46 @@ def edit(req,pk):
         exam_data = ExamForm.objects.get(id=pk)
         return render(req,'fill_exam_form.html',{'data':user_data, 'exam_form':True , 'Exam_data':exam_data})
 
+def updateform(req,pk):
+    if 'user_id' in req.session:
+        if req.method=="POST":
+            Exam_data = ExamForm.objects.get(id=pk)
+            fn = req.POST.get('firstName')
+            ln = req.POST.get('lastName')
+            e = req.POST.get('email')
+            m = req.POST.get('mobile')
+            dob = req.POST.get('dob')
+            g = req.POST.get('gender')
+            a = req.POST.get('address')
+            ex = req.POST.get('exam')
+            c = req.POST.get('center')
+            p = req.FILES.get('photo')
+            f = req.FILES.get('file')
+            Exam_data.first_name = fn
+            Exam_data.last_name = ln
+            Exam_data.email = e
+            Exam_data.mobile = m
+            Exam_data.dob = dob
+            Exam_data.gender = g
+            Exam_data.address = a
+            Exam_data.exam = e
+            Exam_data.exam_center = ex
+            Exam_data.photograph = p
+            Exam_data.signature = f
+            Exam_data.save()
+            Exam_data = ExamForm.objects.all()
+            print(Exam_data)
+            user_data = Student.objects.get(id=req.session.get('user_id'))
+            return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
+
+            
+
+
+
+
+
+
+
 def delete(req,pk):
     if 'user_id' in req.session:
         ExamForm.objects.get(id=pk).delete()
