@@ -132,6 +132,7 @@ def updateform(req,pk):
             ex = req.POST.get('exam')
             c = req.POST.get('center')
             p = req.FILES.get('photo')
+            print(p)
             f = req.FILES.get('file')
             Exam_data.first_name = fn
             Exam_data.last_name = ln
@@ -140,10 +141,13 @@ def updateform(req,pk):
             Exam_data.dob = dob
             Exam_data.gender = g
             Exam_data.address = a
-            Exam_data.exam = e
-            Exam_data.exam_center = ex
-            Exam_data.photograph = p
-            Exam_data.signature = f
+            Exam_data.exam = ex
+            Exam_data.exam_center = c
+            if p is not None:
+                Exam_data.photograph = p
+
+            if f is not None:
+                Exam_data.signature = f
             Exam_data.save()
             Exam_data = ExamForm.objects.all()
             print(Exam_data)

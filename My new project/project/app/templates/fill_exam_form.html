@@ -182,17 +182,24 @@
     </div><br>
 
     <div class="input-box">
-        <label>Upload Photograph</label>
-        <input type="file"  value={{Exam_data.photograph}}  name="photo">
-        {{Exam_data.photograph}}
-    </div><br>
+    <label>Upload Photograph</label>
+    <input type="file" name="photo">
+    {% if Exam_data.photograph %}
+        <a href="{{ Exam_data.photograph.url }}" target="_blank">
+            Current Photo
+        </a>
+    {% endif %}
+</div>
 
-    <div class="input-box">
-        <label>Upload Signature</label>
-        <input type="file" value={{Exam_data.signature}} name="file">
-        {{Exam_data.signature}}
-    </div><br>
-
+<div class="input-box">
+    <label>Upload Signature</label>
+    <input type="file" name="file">
+    {% if Exam_data.signature %}
+        <a href="{{ Exam_data.signature.url }}" target="_blank">
+            Current Signature
+        </a>
+    {% endif %}
+</div>
     <div class="checkbox">
         <input type="checkbox"  required>
         <span>I confirm that the information provided is correct.</span>
