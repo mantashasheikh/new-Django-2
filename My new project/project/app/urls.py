@@ -20,6 +20,7 @@ urlpatterns = [
     path('show_details/edit/<int:pk>/', views.edit, name="edit" ),
     path('updateform/<int:pk>/', views.updateform , name="updateform"),
     path('show_details/delete/<int:pk>/', views.delete, name="delete" ),
+    path('search/' , views.search , name="search"),
     path('logout/', views.logout, name='logout'),
     
     

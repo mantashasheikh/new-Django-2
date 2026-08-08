@@ -3,8 +3,13 @@
 {% block dashboard_content %}
 
 <h2>Show student details who filled the Exam Form</h2><br>
+<form class="search-bar" action="">
+    <input type="text" id="searchInput" placeholder="Search items..." autocomplete="off">
+    <button type="submit">Search</button>
+</form>
 
 <table border="1" cellpadding="10" cellspacing="0" width="100%">
+    
     <tr>
         <th>ID</th>
         <th>First Name</th>
@@ -37,7 +42,7 @@
         
 
         <td>
-            <img src="{{ student.photograph.url }}" width="70" height="70">
+            <img src="{{ student.photograph.url }}" alt="photo" width="70" height="70">
         </td>
 
         <td>

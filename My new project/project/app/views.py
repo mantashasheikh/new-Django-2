@@ -83,6 +83,7 @@ def fill_exam_form(req):
             g = req.POST.get('gender')
             a = req.POST.get('address')
             ex = req.POST.get('exam')
+            print(ex)
             c = req.POST.get('center')
             p = req.FILES.get('photo')
             f = req.FILES.get('file')
@@ -111,6 +112,12 @@ def show_details(req):
         user_data = Student.objects.get(id=req.session.get('user_id'))
         return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
     return redirect('login')
+
+def search(req):
+    if req.method == "POST":
+        xyz = req.POST.get("search")
+        ser_data = Student.objects.filter(name__icontains=xyz)
+        return render(req, 'show_details.html')    
 
 def edit(req,pk):
     if 'user_id' in req.session:
@@ -153,13 +160,6 @@ def updateform(req,pk):
             print(Exam_data)
             user_data = Student.objects.get(id=req.session.get('user_id'))
             return render(req,  'show_details.html' , {'Exam_data':Exam_data , 'data':user_data})
-
-            
-
-
-
-
-
 
 
 def delete(req,pk):
