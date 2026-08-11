@@ -1,19 +1,16 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
 <body>
 
     <h1>Landing Page</h1>
+    <p class="page-subtitle">
+       Manage roll numbers and student information
+    </p>
 
 
     <div class="main-container">
 
-
-        <!-- ============================= -->
-        <!-- PARENT SECTION -->
-        <!-- ============================= -->
-
         <div class="section">
-
-            <h2>Parent</h2>
 
             <a href="{% url 'roll_number_view' %}">
                 <button type="button" class="button">
@@ -23,8 +20,6 @@
 
 
             {% if show_roll_form %}
-
-            <!-- Roll Number Form -->
 
             <div class="form-box">
 
@@ -63,13 +58,7 @@
 
 
 
-        <!-- ============================= -->
-        <!-- CHILD SECTION -->
-        <!-- ============================= -->
-
         <div class="section">
-
-            <h2>Child</h2>
 
             <a href="{% url 'student_view' %}">
                 <button type="button" class="button">
@@ -80,7 +69,6 @@
 
             {% if show_student_form %}
 
-            <!-- Student Form -->
 
             <div class="form-box">
 
@@ -89,9 +77,6 @@
                 <form method="POST">
 
                     {% csrf_token %}
-
-
-                    <!-- Roll Number Dropdown -->
 
                     <label for="roll">
                         Roll Number
@@ -117,9 +102,6 @@
 
                     </select>
 
-
-                    <!-- Name -->
-
                     <label for="name">
                         Name
                     </label>
@@ -131,9 +113,6 @@
                         placeholder="Enter Student Name"
                         required
                     >
-
-
-                    <!-- Email -->
 
                     <label for="email">
                         Email
@@ -147,9 +126,6 @@
                         required
                     >
 
-
-                    <!-- City -->
-
                     <label for="city">
                         City
                     </label>
@@ -162,9 +138,6 @@
                         required
                     >
 
-
-                    <!-- Address -->
-
                     <label for="address">
                         Address
                     </label>
@@ -176,9 +149,6 @@
                         placeholder="Enter Address"
                         required
                     >
-
-
-                    <!-- Contact -->
 
                     <label for="contact">
                         Contact
