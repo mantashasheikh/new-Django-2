@@ -61,6 +61,14 @@
         </div>
 
         {% if show_department %}
+       {% if messages %}
+    {% for i in messages %}
+        <div class="alert alert-{{ i.tags }} alert-dismissible fade show" role="alert">
+            {{ i }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
         <!-- Department Form -->
         <div class="form-section">
 

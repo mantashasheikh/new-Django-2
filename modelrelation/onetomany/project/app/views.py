@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Department, Student
+from django.contrib import messages
 
 
 
@@ -15,13 +16,19 @@ def department_view(req):
         d_name = req.POST.get('d_name')
         d_disc = req.POST.get('d_disc')
 
-        Department.objects.create(
-            d_name=d_name,
-            d_disc=d_disc
-        )
+        department = Department.objects.filter(d_name=d_name)
+        if department:
+            messages.warning(req, "department name already exist")
+            return redirect('department_view')
+        else:
 
-        return redirect('landing')
-
+            Department.objects.create(
+                d_name=d_name,
+                d_disc=d_disc
+            )
+            messages.success(req, "department created successfully")
+            return redirect('department_view')
+        
     return render(req, 'landing.html', {'show_department': True})
 
 
