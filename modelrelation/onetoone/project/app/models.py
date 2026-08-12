@@ -5,6 +5,7 @@ class RollNo(models.Model):
     def __str__(self):
         return str(self.roll_no)
 
+
 class Student(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -18,3 +19,7 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
