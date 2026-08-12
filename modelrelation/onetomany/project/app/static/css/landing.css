@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+
+/* Header */
+.header {
+    background: #1f3c88;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.header p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 28px;
+    border-radius: 10px;
+    border: 1px solid #e1e5eb;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.card .icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.card h2 {
+    font-size: 21px;
+    color: #1f3c88;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #667085;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+
+/* Card Button */
+.btn {
+    display: inline-block;
+    background: #1f3c88;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.btn:hover {
+    background: #162d68;
+}
+
+
+/* Form Section */
+.form-section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    border: 1px solid #e1e5eb;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+    font-size: 21px;
+    color: #1f3c88;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+}
+
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+/* Labels */
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 7px;
+}
+
+
+/* Input & Textarea & Select */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #cfd5dd;
+    border-radius: 6px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+
+/* Textarea */
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+
+/* Focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #1f3c88;
+    box-shadow: 0 0 0 3px rgba(31, 60, 136, 0.1);
+}
+
+
+/* Placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+
+/* Submit Button */
+.submit-btn {
+    background: #1f3c88;
+    color: white;
+    border: none;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: #162d68;
+}
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+    .container {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 25px 18px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .form-section {
+        padding: 22px;
+    }
+}

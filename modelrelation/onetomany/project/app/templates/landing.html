@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Student Management</title>
+
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Student Management System</h1>
+            <p>Manage departments and student information easily</p>
+        </div>
+
+
+        <!-- Main Cards -->
+        <div class="cards">
+
+            <!-- Department Card -->
+            <div class="card">
+
+                <div class="icon">🏢</div>
+
+                <h2>Add Department</h2>
+
+                <p>
+                    Create a new department and add its description.
+                </p>
+
+                <a href="{% url 'department_view' %}" class="btn">
+                    Add Department
+                </a>
+
+            </div>
+
+
+            <!-- Student Card -->
+            <div class="card">
+
+                <div class="icon">👨‍🎓</div>
+
+                <h2>Add Student</h2>
+
+                <p>
+                    Add student information and assign a department.
+                </p>
+
+                <a href="{% url 'student_view' %}" class="btn">
+                    Add Student
+                </a>
+
+            </div>
+
+        </div>
+
+        {% if show_department %}
+        <!-- Department Form -->
+        <div class="form-section">
+
+            <h2>Department Information</h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="d_name">Department Name</label>
+
+                    <input
+                        type="text"
+                        id="d_name"
+                        name="d_name"
+                        placeholder="Enter department name"
+                        maxlength="50"
+                    >
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="d_disc">Department Description</label>
+
+                    <textarea
+                        id="d_disc"
+                        name="d_disc"
+                        placeholder="Enter department description"
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+                    Save Department
+                </button>
+
+            </form>
+
+        </div>
+
+        {% elif show_student %}
+
+        <!-- Student Form -->
+        <div class="form-section">
+
+            <h2>Student Information</h2>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="s_name">Student Name</label>
+
+                    <input
+                        type="text"
+                        id="s_name"
+                        name="s_name"
+                        placeholder="Enter student name"
+                        maxlength="20"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="s_city">Student City</label>
+
+                    <input
+                        type="text"
+                        id="s_city"
+                        name="s_city"
+                        placeholder="Enter city"
+                        maxlength="20"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="dep_name">Department</label>
+
+                    <select name="dep_name">
+
+                       <option value="">
+                           Select Department
+                       </option>
+
+                       {% for department in departments %}
+
+                        <option value="{{ department.id }}">
+                           {{ department.d_name }}
+                        </option>
+
+                        {% endfor %}
+
+                     </select>
+
+                </div>
+
+
+                <button type="submit" class="submit-btn">
+                    Save Student
+                </button>
+
+            </form>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
