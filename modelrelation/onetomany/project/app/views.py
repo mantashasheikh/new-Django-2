@@ -56,3 +56,25 @@ def student_view(req):
         return redirect('landing')
 
     return render(req, 'landing.html',{'show_student': True, 'departments': departments})
+
+def dashboard_view(req):
+    return render(req, 'dashboard.html')    
+
+
+
+def forward_access(req):
+    departments = Department.objects.all()
+
+    return render(req, 'dashboard.html', {
+        'show_forward': True,
+        'departments': departments
+    })
+
+
+def backward_access(req):
+    students = Student.objects.all()
+
+    return render(req, 'dashboard.html', {
+        'show_backward': True,
+        'students': students
+    })    

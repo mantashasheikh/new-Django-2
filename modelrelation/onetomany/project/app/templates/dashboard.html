@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Student Management Dashboard</h1>
+
+        <p>View department and student information</p>
+
+    </div>
+
+
+    <!-- Access Buttons -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="icon">➡️</div>
+
+            <h2>Forward Access</h2>
+
+            <p>
+                Show Department and its Students
+            </p>
+
+            <a href="{% url 'forward_access' %}" class="btn">
+                Forward Access
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">⬅️</div>
+
+            <h2>Backward Access</h2>
+
+            <p>
+                Show Student and its Department
+            </p>
+
+            <a href="{% url 'backward_access' %}" class="btn">
+                Backward Access
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Forward Access Table -->
+
+    {% if show_forward %}
+
+    <div class="form-section">
+
+        <h2>Forward Data</h2>
+        <h2>Department → Students</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Department</th>
+                    <th>Description</th>
+                    <th>Student Name</th>
+                    <th>City</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for department in departments %}
+
+                    {% for student in department.student_set.all %}
+
+                    <tr>
+
+                        <td>
+                            {{ department.d_name }}
+                        </td>
+
+                        <td>
+                            {{ department.d_disc }}
+                        </td>
+
+                        <td>
+                            {{ student.s_name }}
+                        </td>
+
+                        <td>
+                            {{ student.s_city }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Backward Access Table -->
+
+    {% if show_backward %}
+
+    <div class="form-section">
+
+        <h2>Backward Data</h2>
+        <h2>Student → Department</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Student Name</th>
+                    <th>City</th>
+                    <th>Department</th>
+                    <th>Description</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in students %}
+
+                <tr>
+
+                    <td>
+                        {{ student.s_name }}
+                    </td>
+
+                    <td>
+                        {{ student.s_city }}
+                    </td>
+
+                    <td>
+                        {{ student.dep_name.d_name }}
+                    </td>
+
+                    <td>
+                        {{ student.dep_name.d_disc }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
