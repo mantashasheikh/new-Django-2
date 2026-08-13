@@ -46,12 +46,14 @@ body {
 /* Cards */
 .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    margin-bottom: 30px;
+    width: 100%;
 }
 
 .card {
+    width: 100%;
+    box-sizing: border-box;
     background: white;
     padding: 28px;
     border-radius: 10px;
