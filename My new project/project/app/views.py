@@ -174,6 +174,7 @@ def delete(req,pk):
         
 
 def logout(req):
+    
     return redirect('login')
 
 
