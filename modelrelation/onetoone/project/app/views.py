@@ -40,3 +40,17 @@ def student_view(req):
         return redirect('landing')
 
     return render(req, 'landing.html', {'show_student_form': True, 'roll_numbers': roll_numbers})
+
+from django.core.mail import send_mail
+from project.settings import EMAIL_HOST_USER
+
+def mail_service(req):
+    send_mail(
+      "Test mail",
+      "This is test message from django server",
+    #   "neeraj.patel2505@gmail.com",
+      "EMAIL_HOST_USER",
+      ["nkurmbanshi@gmail.com"],
+      fail_silently=False,
+)
+
