@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Student
 from .models import ExamForm
+from django.views.decorators.cache import never_cache
 
 # Create your views here.
 def landing(req):
@@ -15,6 +16,7 @@ def service(request):
 def contact(request):
     return render(request, 'contact.html')
 
+@never_cache
 def register(req):
     if req.method == "POST":
         n = req.POST.get('name')
@@ -42,6 +44,7 @@ def register(req):
                 return render(req,'register.html',{'msg':msg,'register':True})
     return render(req,'register.html',{'register':True})
 
+@never_cache
 def login(req):
     if req.method == 'POST':
         e = req.POST.get('email')
@@ -59,6 +62,8 @@ def login(req):
                 return redirect("dashboard")
     return render(req,'login.html')
 
+
+@never_chache
 def dashboard(req):
     if 'user_id' in req.session :
         user_data = Student.objects.get(id=req.session.get('user_id'))
@@ -66,11 +71,15 @@ def dashboard(req):
     msg = "Please login first"
     return render(req,'dashboard.html',{'login':True,'msg':msg})
 
+
+@never_chache
 def dashboard_home(req):
     return render(req , "dashboard_home.html")
 
 def profile(req):
     return render(req , 'profile.html')
+
+
 
 def fill_exam_form(req):
     if 'user_id' in req.session :
@@ -173,10 +182,28 @@ def delete(req,pk):
 
         
 
+
 def logout(req):
-    
+    if  'email' in req.session and 'password' in req.session :
+        print(req.session)
+        req.session.flush()
+        # user=Session.objects.all()
+        # print(user)
+        # user.delete()
+        return redirect('login')
     return redirect('login')
 
 
-   
+from django.core.mail import send_mail
+from project.settings import EMAIL_HOST_USER
+
+def mail_service(req):
+    send_mail(
+      "Test mail",
+      "This is test message from django server",
+    #   "neeraj.patel2505@gmail.com",
+      "EMAIL_HOST_USER",
+      ["nkurmbanshi@gmail.com"],
+      fail_silently=False,
+)   
     
