@@ -21,6 +21,13 @@ urlpatterns = [
     path('updateform/<int:pk>/', views.updateform , name="updateform"),
     path('show_details/delete/<int:pk>/', views.delete, name="delete" ),
     path('search/' , views.search , name="search"),
+
+
+
+    path("forget_password/", views.forget_password, name="forget_password"),
+    path("send_otp/", views.send_otp, name="send_otp"),
+    path("submit_otp/", views.varify_otp, name="submit_otp"),
+    path("reset_password/", views.reset, name="reset_password"),
     path('logout/', views.logout, name='logout'),
     
     

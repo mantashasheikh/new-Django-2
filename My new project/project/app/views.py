@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from .models import Student
 from .models import ExamForm
 from django.views.decorators.cache import never_cache
+from django.contrib import messages
+import random
 
 # Create your views here.
 def landing(req):
@@ -63,7 +65,7 @@ def login(req):
     return render(req,'login.html')
 
 
-@never_chache
+@never_cache
 def dashboard(req):
     if 'user_id' in req.session :
         user_data = Student.objects.get(id=req.session.get('user_id'))
@@ -72,7 +74,7 @@ def dashboard(req):
     return render(req,'dashboard.html',{'login':True,'msg':msg})
 
 
-@never_chache
+@never_cache
 def dashboard_home(req):
     return render(req , "dashboard_home.html")
 
@@ -194,16 +196,85 @@ def logout(req):
     return redirect('login')
 
 
-from django.core.mail import send_mail
-from project.settings import EMAIL_HOST_USER
+# flow of forget password
 
-def mail_service(req):
-    send_mail(
-      "Test mail",
-      "This is test message from django server",
-    #   "neeraj.patel2505@gmail.com",
-      "EMAIL_HOST_USER",
-      ["nkurmbanshi@gmail.com"],
-      fail_silently=False,
-)   
+from django.core.mail import send_mail
+# from project.settings import EMAIL_HOST_USER
+
+# def mail_service(req):
+#     send_mail(
+#       "Test mail",
+#       "This is test message from django server",
+#     #   "neeraj.patel2505@gmail.com",
+#       "EMAIL_HOST_USER",
+#       ["nkurmbanshi@gmail.com"],
+#       fail_silently=False,
+# )   
     
+
+def forget_password(req):
+    return render(req, "forget_password.html")
+
+
+def send_otp(req):
+    if req.method == "POST":
+        e = req.POST.get("email")
+
+        user = Student.objects.filter(email=e)
+
+        if not user:
+            messages.warning(req, "Email Id Not Registered")
+            return redirect("forget_password")
+
+        otp = random.randint(11111, 99999)
+
+        send_mail(
+            "Otp",
+            f"your otp from django server is {otp}",
+            "neeraj.patel2505@gmail.com",
+            [e],
+            fail_silently=False,
+        )
+
+        req.session["email"] = e
+        req.session["otp"] = otp
+
+        return redirect("submit_otp")
+
+    return render(req, "forget_password.html")
+
+def varify_otp(req):
+    if req.method == "POST":
+        sub_otp = req.POST.get("sub_otp")
+        session_otp = req.session.get("otp")
+
+        if str(sub_otp) != str(session_otp):
+            messages.warning(req, "Please enter valid OTP")
+            return redirect("submit_otp")
+        else:
+            return redirect("reset_password")
+
+    return render(req, "submit_otp.html")
+
+
+def reset(req):
+    if req.method == "POST":
+        np = req.POST.get("new_password")
+        cnp = req.POST.get("con_new_password")
+
+        if np != cnp:
+            messages.warning(
+                req,
+                "New password & confirm new password not matched"
+            )
+            return redirect("reset_password")
+
+        e = req.session.get("email")
+
+        old_data = Student.objects.get(email=e)
+        old_data.password = np
+        old_data.save()
+
+        return redirect("login")
+
+    return render(req, "reset_password.html")
