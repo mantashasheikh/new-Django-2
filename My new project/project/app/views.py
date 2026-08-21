@@ -213,7 +213,7 @@ from django.core.mail import send_mail
     
 
 def forget_password(req):
-    return render(req, "forget_password.html")
+    return render(req, "forgot_password.html")
 
 
 def send_otp(req):
