@@ -3,6 +3,7 @@ from .models import Student
 from .models import ExamForm
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
+from django.contrib.sessions.models import Session
 import random
 
 # Create your views here.
@@ -71,7 +72,7 @@ def dashboard(req):
         user_data = Student.objects.get(id=req.session.get('user_id'))
         return render(req,'dashboard.html',{'data':user_data})
     msg = "Please login first"
-    return render(req,'dashboard.html',{'login':True,'msg':msg})
+    return redirect('login')
 
 
 @never_cache
@@ -183,13 +184,12 @@ def delete(req,pk):
 
 
         
-
-
+@never_cache
 def logout(req):
-    if  'email' in req.session and 'password' in req.session :
+    if  'user_id' in req.session :
         print(req.session)
         req.session.flush()
-        # user=Session.objects.all()
+        user=Session.objects.all().delete()
         # print(user)
         # user.delete()
         return redirect('login')
